@@ -19,10 +19,10 @@ pip install pandas
 
 pip install requests
 
-pip install ipywidgets
 
 pip install python-firebase
 
+note:- Edit line no 6,7 in main code to add your Firebase credentials
 
 ----------------------------------------------
 ----If firebase is having problem in import----
