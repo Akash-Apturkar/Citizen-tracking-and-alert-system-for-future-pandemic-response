@@ -22,7 +22,7 @@ pip install requests
 
 pip install python-firebase
 
-note:- Edit line no 6,7 in main code to add your Firebase credentials
+note:- Edit line no 11,12 in main code to add your Firebase credentials
 
 ----------------------------------------------
 ----If firebase is having problem in import----
