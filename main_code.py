@@ -37,7 +37,7 @@ def get_data(uid):
     canvas1.create_window(350, 350, window=listbox)
     
 
-    firebase1 = firebase.FirebaseApplication("https://apptest-cad89.firebaseio.com/",None)
+    firebase1 = firebase.FirebaseApplication("<your_firebase_url>",None)
     
     label_path_lat = "/Data/{}/lat".format(uid)
     label_path_long = "/Data/{}/long".format(uid)
