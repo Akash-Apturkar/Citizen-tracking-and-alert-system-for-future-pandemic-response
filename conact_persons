@@ -1,0 +1,51 @@
+import pandas as pd
+
+import math
+
+#Haversine function to find the distance between 2 points on a sphere by using the latitude and longitude
+def havers(lat1, lat2, lon1, lon2):
+
+    R = 6373.0
+    #radius of the Earth
+
+    #convert the latitude longitude details to radians
+    latitude1 = math.radians(lat1)
+    longitude1 = math.radians(lon1)
+    latitude2 = math.radians(lat2)
+    longitude2 = math.radians(lon2)
+
+    #determine the change in coordinates
+    dlon = longitude2 - longitude1
+    dlat = latitude2 - latitude1
+
+    #formula to find the distance
+    a = math.sin(dlat / 2)**2 + math.cos(latitude1) * math.cos(latitude2) * math.sin(dlon / 2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    distance = ( R * c ) * 1000
+
+    return(distance)
+
+lat1= [52.574560,52.466634,53.67777]
+long1=[13.278290,13.321577,14.65788]
+lat2= [52.574580,52.466387,56.67777]
+long2=[13.278620,13.322380,14.65788]
+contact_uids =[]
+data1 = pd.DataFrame({
+'lat': lat1,
+'lon': long1,
+
+})
+
+data2 = pd.DataFrame({
+'lat': lat2,
+'lon': long2,
+})
+
+for i in range(0,len(data1)): 
+    for j in range(0,len(data2)): 
+        dist= havers(data1.iloc[i]['lat'],data2.iloc[j]['lat'],data1.iloc[i]['lon'],data2.iloc[j]['lon'])
+        print(dist)
+
+        
+            
+            
