@@ -3,25 +3,33 @@ import os
 import pandas as pd
 import folium
 import math
+from firebase import firebase 
+import os.path
+import tkinter as tk
 
 authentication = firebase.FirebaseAuthentication('tl9sQ6cK6MsDjscyRtVTfOmSeeKDJsfILXjgHYsc', 'nidhu.kulkarni@gmail.com', extra={'id': 'fbaf0fed-762d-4e02-a62d-302db69636fb'})
 fireapp = firebase.FirebaseApplication('https://apptest-cad89.firebaseio.com/',  authentication=authentication)
 root= tk.Tk()
 homedir = os.path.expanduser("~") #creating a home dir to store the export.html file
-canvas1 = tk.Canvas(root, width = 700, height = 600)
+canvas1 = tk.Canvas(root, width = 700, height = 600, bg = 'black')
 canvas1.pack()
 label1 = tk.Label(root, text='PANDEMIC ALERT SYSTEM')
-label1.config(font=('helvetica', 10))
-canvas1.create_window(350, 25, window=label1)
+label1.config(font=('helvetica', 30), bg = 'black', fg = 'white')
+canvas1.create_window(350, 35, window=label1)
 
 label3 = tk.Label(root, text='Enter the UID:')
-label3.config(font=('helvetica', 9))
+label3.config(font=('helvetica', 15), bg = 'black', fg = 'white')
 canvas1.create_window(350, 120, window=label3)
 
 entry1 = tk.Entry (root) 
 canvas1.create_window(350, 140, window=entry1)
 contact_persons_uid = []
 #root.geometry("120*60")
+
+label4 = tk.Label(root, text='Contact Persons:')
+label4.config(font=('helvetica', 15), bg = 'black', fg = 'white')
+canvas1.create_window(350, 250, window=label4)
+
 
 def get_data(uid):
     list1 = []
@@ -53,6 +61,8 @@ def call_map():
     uid = entry1.get()
     try:
         latitude, longitude = get_data(uid)
+        latitude = [i for i in latitude if i != 0]
+        longitude = [i for i in longitude if i != 0]
         get_map(latitude, longitude, uid)
     except Exception:
         label3['text'] = "Please check the UID"
@@ -111,6 +121,8 @@ def get_contact_person():
     
     uid = entry1.get()
     lat1, long1 = get_data(uid)
+    lat1 = [i for i in lat1 if i != 0]
+    long1 = [i for i in long1 if i != 0]
     data1 = pd.DataFrame({
     'lat': lat1,
     'lon': long1,
@@ -121,7 +133,10 @@ def get_contact_person():
     print(list_uids)
     for item in list_uids:
         
+        print(item)
         lat2,long2 = get_data(item)
+        lat2 = [i for i in lat2 if i != 0]
+        long2 = [i for i in long2 if i != 0]
         data2 = pd.DataFrame({
         'lat': lat2,
         'lon': long2,
@@ -133,6 +148,7 @@ def get_contact_person():
                 print(dist)
                 if dist < 30:
                     if item not in contact_persons_uid:
+                        print("Contact detected")
                         contact_persons_uid.append(item)
         
     listbox = tk.Listbox(root)
@@ -148,19 +164,19 @@ def send_alert():
     
 def main():
     
-    display_map_button = tk.Button(root, text = "Show Map with markers", command = call_map)
+    display_map_button = tk.Button(root, text = "Show Map with markers", command = call_map, bg = 'cyan', fg = 'black')
 
     canvas1.create_window(350, 180, window=display_map_button)
     
-    button = tk.Button(root, text = "Get contact persons", command = get_contact_person)
+    button = tk.Button(root, text = "Get contact persons", command = get_contact_person, bg = 'cyan', fg = 'black')
     canvas1.create_window(350, 210, window=button)
     listbox = tk.Listbox(root)
     canvas1.create_window(350, 350, window=listbox)
-    button1 = tk.Button(root, text = "Send Alert", command = send_alert)
-    canvas1.create_window(350, 510, window=button1)
-    label2 = tk.Label(root, text='Designed by \n ')
-    label2.config(font=('helvetica', 10))
-    label2.pack()
+    button1 = tk.Button(root, text = "Send Alert", command = send_alert, bg = 'cyan', fg = 'black')
+    canvas1.create_window(350, 460, window=button1)
+    label2 = tk.Label(root, text='Designed by, \n Akash Apturkar, Arush Oli, Aqsa Firdaus Khan, Nidhi Krishna Kulkarni\n Under the guidance of Sreeganesh Thottempudi \n SRH Berlin University  ')
+    label2.config(font=('helvetica', 10), bg = 'black', fg = 'white')
+    canvas1.create_window(350, 560, window=label2)
     root.mainloop()
 
 main()
