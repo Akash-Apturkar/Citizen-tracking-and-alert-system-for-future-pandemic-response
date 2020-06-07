@@ -9,6 +9,11 @@ Aqsa Fridaus Khan
 -----------------------
 Steps for installing :-
 -----------------------
+For executing the code, run the main_code_updaated.py. For that the prerequisites need to be completed:
+
+Firebase credentials of the database need to be supplied in the  main_code_updaated.py and also the android app (download and open 
+the .aia file in MIT appinventor for that)
+
 The following modules need to be installed using pip in the command prompt before running the main code:
 
 
