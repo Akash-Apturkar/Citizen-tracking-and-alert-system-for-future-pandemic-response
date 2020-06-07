@@ -7,8 +7,8 @@ from firebase import firebase
 import os.path
 import tkinter as tk
 
-authentication = firebase.FirebaseAuthentication('tl9sQ6cK6MsDjscyRtVTfOmSeeKDJsfILXjgHYsc', 'nidhu.kulkarni@gmail.com', extra={'id': 'fbaf0fed-762d-4e02-a62d-302db69636fb'})
-fireapp = firebase.FirebaseApplication('https://apptest-cad89.firebaseio.com/',  authentication=authentication)
+authentication = firebase.FirebaseAuthentication('<Your_firebase_API_key>', 'your_emailid_used_in_firebase', extra={'id': 'fbaf0fed-762d-4e02-a62d-302db69636fb'})
+fireapp = firebase.FirebaseApplication('<your_firebase_URL>',  authentication=authentication)
 root= tk.Tk()
 homedir = os.path.expanduser("~") #creating a home dir to store the export.html file
 canvas1 = tk.Canvas(root, width = 700, height = 600, bg = 'black')
@@ -40,7 +40,7 @@ def get_data(uid):
     canvas1.create_window(350, 350, window=listbox)
     
 
-    firebase1 = firebase.FirebaseApplication("https://apptest-cad89.firebaseio.com/",None)
+    firebase1 = firebase.FirebaseApplication("<your_firebase_URL>",None)
     
     label_path_lat = "Data/{}/lat".format(uid)
     label_path_long = "Data/{}/long".format(uid)
@@ -112,7 +112,7 @@ def havers(lat1, lat2, lon1, lon2):
 
 def get_contact_person():
     list_uids=[]
-    firebase1 = firebase.FirebaseApplication("https://apptest-cad89.firebaseio.com/",None)
+    firebase1 = firebase.FirebaseApplication("<your_firebase_URL>",None)
     label_path = "Data/{}".format("uids")
     result = firebase1.get(label_path,'')
     result= result.replace('"','')#added to remove extra " added while uploading from app
@@ -158,7 +158,7 @@ def get_contact_person():
     
 def send_alert():
     for i in contact_persons_uid:
-        firebase1 = firebase.FirebaseApplication("https://apptest-cad89.firebaseio.com/",None)
+        firebase1 = firebase.FirebaseApplication("your_firebase_URL",None)
         label_path = "Data/{}".format(i)
         firebase1.put(label_path,'notification','alert')    
     
