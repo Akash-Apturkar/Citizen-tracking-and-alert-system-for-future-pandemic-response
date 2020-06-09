@@ -12,6 +12,8 @@ authentication = firebase.FirebaseAuthentication('<Your_firebase_API_key>', 'you
 fireapp = firebase.FirebaseApplication('<your_firebase_URL>',  authentication=authentication)
 root= tk.Tk()
 homedir = os.path.expanduser("~") #creating a home dir to store the export.html file
+
+#Using tkinter for adding widgets to GUI
 canvas1 = tk.Canvas(root, width = 700, height = 600, bg = 'black')
 canvas1.pack()
 label1 = tk.Label(root, text='PANDEMIC ALERT SYSTEM')
