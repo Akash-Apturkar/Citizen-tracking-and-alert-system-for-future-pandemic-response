@@ -16,8 +16,6 @@ the .aia file in MIT appinventor for that)
 
 The following modules need to be installed using pip in the command prompt before running the main code:
 
-
-
 pip install folium
 
 pip install pandas
