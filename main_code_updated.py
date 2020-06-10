@@ -38,7 +38,7 @@ def get_data(uid):
     list1 = []
     list2 = []
     
-    
+   
     listbox = tk.Listbox(root)
     canvas1.create_window(350, 350, window=listbox)
     
