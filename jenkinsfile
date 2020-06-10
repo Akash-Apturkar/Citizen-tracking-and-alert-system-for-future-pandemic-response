@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir(path: env.BUILD_ID) { 
                     unstash(name: 'compiled-results') 
-                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller --onefile main_code_updated.py'" 
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller --onefile -w main_code_updated.py'" 
                 }
             }
             post {
